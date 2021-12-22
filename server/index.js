@@ -4,7 +4,6 @@ import cors from "cors";
 const PORT = process.env.PORT || 3333;
 
 const app = express();
-// app.use(favicon(__dirname + "./public/favicon.png"));
 
 app.use(express.json());
 app.use(
