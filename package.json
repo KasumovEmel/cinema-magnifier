@@ -37,6 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "nodemon server",
+    "heroku-prebuild": "npm install -f",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
