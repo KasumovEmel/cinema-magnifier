@@ -8,8 +8,8 @@ app.use(express.json());
 
 const users = [];
 const favorites = {
-  actors: [],
-  moviesS: [],
+  favoritesActors: [],
+  favoriteMovies: [],
 };
 
 app.post("/registration", (req, res) => {
@@ -20,20 +20,21 @@ app.post("/registration", (req, res) => {
 
 app.post("/favorite/addElement", (req, res) => {
   if (req.body.type === "actors") {
-    if (favorites.actors.find((elem) => elem.id === req.body.element.id)) {
-      favorites.actors = favorites.actors.filter(
+    if (favorites.favoritesActors.find((elem) => elem.id === req.body.element.id)) {
+      favorites.favoritesActors = favorites.favoritesActors.filter(
         (elem) => elem.id !== req.body.element.id
       );
     } else {
-      favorites.actors.push(req.body.element);
+      favorites.favoritesActors.push(req.body.element);
     }
-  } else if (req.body.type === "moviesS") {
-    if (favorites.moviesS.find((elem) => elem.id === req.body.element.id)) {
-      favorites.moviesS = favorites.moviesS.filter(
+  } else if (req.body.type === "movies") {
+    if (favorites.favoriteMovies.find((elem) => elem.id === req.body.element.id)) {
+      favorites.favoriteMovies = favorites.favoriteMovies.filter(
         (elem) => elem.id !== req.body.element.id
       );
     } else {
-      favorites.moviesS.push(req.body.element);
+      favorites.favoriteMovies.push(req.body.element);
+      console.log(favorites);
     }
   }
   console.log(favorites);

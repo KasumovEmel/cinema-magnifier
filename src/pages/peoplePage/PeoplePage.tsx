@@ -51,8 +51,8 @@ const PeoplePage: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const { actors } = await FavoriteService.fetchFavorites();
-      setCurrentFavorite(actors);
+      const { favoritesActors } = await FavoriteService.fetchFavorites();
+      setCurrentFavorite(favoritesActors);
     })();
   }, []);
 
@@ -70,7 +70,7 @@ const PeoplePage: FC = () => {
       <PeoplePageWrapper>
         <PeoplePageContainer>
           {people.map(({ name, profile_path, id }) => {
-            const isLiked = currentFavorites.some((elem) => elem.id === id);
+            const isLiked = currentFavorites?.some((elem) => elem.id === id);
             return (
               <PeopleCard
                 name={name}

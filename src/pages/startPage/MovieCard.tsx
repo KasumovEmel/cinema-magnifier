@@ -108,7 +108,7 @@ const MovieCard: FC<CardMovieProps> = ({
 
     FavoriteService.addFavoriteElement(
       { title, popularity, poster_path, overview, id },
-      "moviesS"
+      "movies"
     );
   }, [setLiked, title, popularity, poster_path, overview, id]);
   return (
