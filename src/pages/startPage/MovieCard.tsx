@@ -86,7 +86,6 @@ const MovieCard: FC<CardMovieProps> = ({
   id,
 }) => {
   const [liked, setLiked] = useState(false);
-  console.log(isLiked);
   const onLikeClick = useCallback(() => {
     setLiked((prevState) => !prevState);
 

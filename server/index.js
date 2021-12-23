@@ -46,7 +46,6 @@ app.post("/favorite/addElement", (req, res) => {
       );
     } else {
       favorites.favoriteMovies.push(req.body.element);
-      console.log(favorites);
     }
   }
   res.status(200).json(favorites);
