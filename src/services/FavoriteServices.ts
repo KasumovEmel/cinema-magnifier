@@ -21,10 +21,10 @@ export default class FavoriteService {
   static async fetchFavorites() {
     try {
       const response = await axios.get(BASE_URL + "fetchFavorites");
-      return await Promise.resolve(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
-      return await Promise.reject(error);
+      return error;
     }
   }
 

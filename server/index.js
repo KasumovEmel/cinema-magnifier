@@ -1,10 +1,18 @@
-import express from "express";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cors = require("cors");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const express = require("express");
 
-const PORT = process.env.PORT || 3333;
+const PORT = 3333;
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const users = [];
 const favorites = {
@@ -20,7 +28,9 @@ app.post("/registration", (req, res) => {
 
 app.post("/favorite/addElement", (req, res) => {
   if (req.body.type === "actors") {
-    if (favorites.favoritesActors.find((elem) => elem.id === req.body.element.id)) {
+    if (
+      favorites.favoritesActors.find((elem) => elem.id === req.body.element.id)
+    ) {
       favorites.favoritesActors = favorites.favoritesActors.filter(
         (elem) => elem.id !== req.body.element.id
       );
@@ -28,7 +38,9 @@ app.post("/favorite/addElement", (req, res) => {
       favorites.favoritesActors.push(req.body.element);
     }
   } else if (req.body.type === "movies") {
-    if (favorites.favoriteMovies.find((elem) => elem.id === req.body.element.id)) {
+    if (
+      favorites.favoriteMovies.find((elem) => elem.id === req.body.element.id)
+    ) {
       favorites.favoriteMovies = favorites.favoriteMovies.filter(
         (elem) => elem.id !== req.body.element.id
       );
@@ -37,14 +49,12 @@ app.post("/favorite/addElement", (req, res) => {
       console.log(favorites);
     }
   }
-  console.log(favorites);
-  res.status(200).json("favorite");
+  res.status(200).json(favorites);
 });
 
 app.get("/favorite/fetchFavorites", (req, res) => {
   res.status(200).json(favorites);
 });
-
 
 app.listen(PORT, () => {
   console.log("Server has been started... PORT 3333");

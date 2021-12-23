@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import FavoriteService from "../../services/FavoriteServices";
 import { CardMovieProps } from "./StartPage";
@@ -14,13 +14,6 @@ const MovieCardWrapper = styled.div`
   margin: 40px 0 40px 0;
   justify-content: center;
   align-items: center;
-  /* border: solid 1.9px;
-  border-radius: 15px;
-  transition: all 3s;
-  :hover {
-    transition: 3s;
-    transform: scale(1.1);
-  } */
 `;
 
 const HeaderContainer = styled.div`
@@ -36,11 +29,6 @@ const Header = styled.h3`
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* transition: all 3s;
-  :hover {
-    transition: 3s;
-    transform: translateX(-10px);
-  } */
 `;
 
 const ImgContainer = styled.div`
@@ -71,11 +59,6 @@ const Rating = styled.div`
   display: flex;
   justify-content: center;
   font-size: 17px;
-  /* transition: all 1s;
-  :hover {
-    transition: 1s;
-    transform: scale(1.1) rotate(3deg);
-  } */
 `;
 
 const SVG = styled.div.attrs((props: { isLiked: boolean }) => props)`
@@ -102,7 +85,8 @@ const MovieCard: FC<CardMovieProps> = ({
   isLiked,
   id,
 }) => {
-  const [liked, setLiked] = useState(isLiked);
+  const [liked, setLiked] = useState(false);
+  console.log(isLiked);
   const onLikeClick = useCallback(() => {
     setLiked((prevState) => !prevState);
 
@@ -111,6 +95,11 @@ const MovieCard: FC<CardMovieProps> = ({
       "movies"
     );
   }, [setLiked, title, popularity, poster_path, overview, id]);
+
+  useEffect(() => {
+    setLiked(isLiked);
+  }, [isLiked]);
+
   return (
     <MovieCardWrapper>
       <HeaderContainer>
@@ -148,4 +137,4 @@ const MovieCard: FC<CardMovieProps> = ({
   );
 };
 
-export default MovieCard;
+export default React.memo(MovieCard);

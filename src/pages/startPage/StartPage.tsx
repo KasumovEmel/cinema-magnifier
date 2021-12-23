@@ -67,7 +67,7 @@ const StartPage: FC = () => {
       const { favoriteMovies } = await FavoriteService.fetchFavorites();
       setCurrentFavorite(favoriteMovies);
     })();
-  }, []);
+  }, [setCurrentFavorite]);
 
   useEffect(() => {
     dispatch({ type: fetchMovies.type, payload: page });
@@ -82,21 +82,20 @@ const StartPage: FC = () => {
       <Header />
       <StartPageWrapper>
         <MoviesContainer>
-          {movies.length &&
-            movies.map(({ title, poster_path, popularity, id, overview }) => {
-              const isLiked = currentFavorites?.some((elem) => elem.id === id);
-              return (
-                <MovieCard
-                  title={title}
-                  poster_path={poster_path}
-                  popularity={popularity}
-                  overview={overview}
-                  key={id}
-                  id={id}
-                  isLiked={isLiked}
-                />
-              );
-            })}
+          {movies.map(({ title, poster_path, popularity, id, overview }) => {
+            const isLiked = currentFavorites?.some((elem) => elem.id === id);
+            return (
+              <MovieCard
+                title={title}
+                poster_path={poster_path}
+                popularity={popularity}
+                overview={overview}
+                key={id}
+                id={id}
+                isLiked={isLiked}
+              />
+            );
+          })}
         </MoviesContainer>
         <div>
           <StyleBtn type="primary" onClick={changePagePlus}>
